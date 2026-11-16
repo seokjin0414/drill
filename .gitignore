@@ -1,0 +1,6 @@
+# 쓰면서 쌓이는 기록에는 그 환경의 시스템 이름과 수치가 들어간다
+ledger.md
+ledger-archive.md
+local.md
+*backup*
+.DS_Store
