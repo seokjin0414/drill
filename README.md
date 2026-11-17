@@ -41,7 +41,7 @@ The rules are plain natural language, so they are not tied to one tool.
 git clone https://github.com/seokjin0414/drill.git ~/.claude/skills/drill
 ```
 
-To update, run `git -C ~/.claude/skills/drill pull`. The record files and `local.md` are ignored by git, so pulling never conflicts with them.
+To update, run `git -C ~/.claude/skills/drill pull`. The record files and `local.md` are ignored by git, so pulling never conflicts with them. If the skill has edited `SKILL.md` in place (see `고쳐` below), commit or stash that edit before pulling.
 
 **Tools without skill support**: put the body of `SKILL.md` into the instruction file the tool always loads (`AGENTS.md` and the like) or into the system prompt. The record only carries over where the agent can write files.
 
@@ -54,11 +54,13 @@ To update, run `git -C ~/.claude/skills/drill pull`. The record files and `local
 | `/drill 복습 [area]` | Review: picks items from the record and asks again |
 | `/drill 정리` | Summary: shows what you know and what is missing, by area |
 | `/drill 노말` · `/drill 헬` | Switches the question intensity for the session (normal / hell) |
+| `/drill 고쳐 <what was off>` | Fix: edits the rule in `SKILL.md` that let a bad question through |
 | `/drill 끄기` | Turns it off for the session |
 
 - In tools without slash commands, say the same thing in words ("drill 복습", "노말로").
 - Answering is optional. If you give a work instruction instead of an answer, it drops the question and does the work.
 - It does not ask on turns where you made no new judgment, such as lookups or simple execution. It also stays quiet during incident response.
+- If a question was pointless or off, say so in the conversation ("질문 별로"). It drops the question, edits the rule that let it through, and shows the line before and after. The edit applies from that response on.
 - The skill description says to turn on in technical sessions even when not invoked, so it may turn itself on. See "Adjusting for your environment" to change this.
 
 ## Intensity
@@ -88,6 +90,7 @@ The record contains the system names and values of your environment, so it is li
 
 - **Default intensity**: to make normal the default, change the first paragraph of the '질문' section in `SKILL.md` and the "(기본)" in its subheading.
 - **Reference material for hell (optional)**: if you have material to calibrate the level of questioning against, such as notes of real interview questions, create `local.md` in the skill folder and write its path there. It works without one.
+- **After a fix (optional)**: if a fix made with `고쳐` should also go somewhere else, such as a second copy of the skill, write that step in `local.md`.
 - **How it turns on**: to have it turn on only when invoked, delete the sentence in the `SKILL.md` `description` that says to turn on in technical sessions without being invoked ("기술 작업 세션에서는 부르지 않아도 … 적용한다"). To make sure it is on in every session, the description alone is not a guarantee, so add the line below to the instruction file that is always loaded in your environment (`CLAUDE.md`, `AGENTS.md`, and the like).
 
 ```markdown
