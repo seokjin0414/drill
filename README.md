@@ -72,7 +72,7 @@ To update, run `git -C ~/.claude/skills/drill pull`. The record files and `local
 
 ## Record
 
-Only concepts you got wrong or did not know are written to `ledger.md`, one line each. The state moves from `헷갈림` (confused) to `설명함` (explained) to `확인됨` (confirmed). When the same concept comes up in a later session, it asks before explaining again. `복습` (review) picks its questions from this record.
+Only concepts you got wrong or did not know are written to `ledger.md`, one line each. The state moves from `헷갈림` (confused) to `설명함` (explained) to `확인됨` (confirmed). A concept is confirmed only when you get it right on a later day than the explanation, not right after hearing it. When the same concept comes up in a later session, it asks before explaining again. `복습` (review) picks its questions from this record.
 
 The record contains the system names and values of your environment, so it is listed in `.gitignore` and never reaches the repository.
 
